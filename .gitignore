@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+
+# Build directories
+build/
+.idea/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
