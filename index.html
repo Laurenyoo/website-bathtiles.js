@@ -18,11 +18,12 @@
         }
         .container {
             margin-left: 50px;
-            margin-right: 50px;
+            width: 800px;
         }
         .title {
             font-size: 100px;
             margin-right: 10px;
+            margin-bottom: 20px;
             display: inline-block;
         }
         .heatmap {
@@ -34,9 +35,10 @@
             background-color: #f4f4f4;
             padding: 10px;
             border-radius: 5px;
+            width: 800px;
         }
         .npm-command {
-            color: #388a34;
+            color: #00D26A;
         }
     </style>
 </head>
@@ -45,85 +47,140 @@
     <div class="title">bathtiles.js</div>
     <img src="./public/tileicon.jpg" alt="tile icon" style="width: 150px; height: auto; vertical-align: bottom;">
 </div>
-<h1 class="container">Example</h1>
+<h1 class="container">doesn't look like a wall of bathtiles?🛁</h1>
 <div id="heatmap" class="container heatmap"></div>
-<button id="loadButton" class="container">Load Data</button>
+<button id="loadButton" style="margin-left: 50px;">Toggle Data</button>
 
-<h1 class="container">About</h1>
+<h1 class="container">about</h1>
 <p class="container">
-    Created by Lauren Yoo, who developed this after constantly looking at their LeetCode submission tracker during their job hunt and, for some reason, really liked how this particular heatmap looked.
+    created by lauren yoo, who developed this after constantly looking at the LeetCode submission tracker during recruitment season and(for some reason) really liked how this particular heatmap looked.
     bathtiles.js was named after the retro bathroom tiles that the heatmap looks similar to, specifically the mosaic kind.
 </p>
 
-<h3 class="container">Made with:</h3>
+<h3 class="container">powered by:</h3>
 <ul class="container">
     <li>d3</li>
     <li>Tippy.js</li>
 </ul>
 
-<h1 class="container">Installation</h1>
-<span class="container">
-        Run <b class="npm-command">npm install bathtiles.js</b> in the terminal.
-    </span>
+<h1 class="container">installation</h1>
+<p class="container">
+        run <b class="npm-command">npm install bathtiles.js</b> in the terminal, or save the bathtiles.js files in your repository.<br/>
+        (if you save bathtiles.js file in the repo locally, then remove the two import lines at the top of the file)
+</p>
 
-<h1 class="container">Usage</h1>
-<pre class="container pre-code">
+<h1 class="container">usage</h1>
+    <pre class="container pre-code">
         <code>
-            const target = document.getElementById('heatmap');<br>
-            const bathtiles = new Bathtiles();<br>
+            import { Bathtiles } from 'bathtiles.js';
+            const target = document.getElementById('heatmap');
+            const bathtiles = new Bathtiles();
             bathtiles.load(target);
         </code>
     </pre>
-
-<h1 class="container">Support</h1>
+<h1 class="container">documentation</h1>
+<p class="container">
+    <h3 class="container">🟩 = new Bathtiles(json = null, mainColors = '#00D26A')</h3>
+    <p class="container">
+        initializes bathtiles with an optional json and mainColors parameters. mainColors will set most 'intense' color and it will automatically create the range in colors.
+    </p>
+    <pre class="container pre-code">
+        <code>
+            bathtiles.load(target);
+        </code>
+    </pre>
+    <h3 class="container">🟩.load(target)</h3>
+    <p class="container">
+        visualizes and loads the HTML element into bathtiles.
+    </p>
+    <pre class="container pre-code">
+        <code>
+            bathtiles.load(target);
+        </code>
+    </pre>
+    <h3 class="container">🟩.import(json)</h3>
+    <p class="container">
+        imports a json into bathtiles.
+    </p>
+    <pre class="container pre-code">
+        <code>
+            const data = {
+                JSON.stringify({
+                    '1704067200': 5, // January 1, 2024
+                    '1706745600': 3, // February 1, 2024
+                    ...
+                }),
+            };
+            bathtiles.import(data);
+            bathtiles.load(target);
+        </code>
+    </pre>
+    <h3 class="container">🟩.empty()</h3>
+    <p class="container">
+        empties the data in bathtiles.
+    </p>
+    <pre class="container pre-code">
+        <code>
+            bathtiles.empty()
+            bathtiles.load(target);
+        </code>
+    </pre>
+</p>
+<h1 class="container">support</h1>
 <p class="container">
     If there are any issues, create a new issue in the
-    <a href="https://github.com/Laurenyoo/bathtiles.js/issues" target="_blank" style="color: #388a34;">GitHub issue tracker</a>.
+    <a href="https://github.com/Laurenyoo/bathtiles.js/issues" target="_blank" style="color: #00D26A;">GitHub issue tracker</a>.
 </p>
 
-<h1 class="container">Creator</h1>
-<div class="container">Lauren Yoo</div>
+<h1 class="container">creator</h1>
+<div class="container">
+    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="large" data-theme="light" data-type="VERTICAL" data-vanity="lauren-yoo" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/lauren-yoo?trk=profile-badge" target="_blank"></a></div>
+</div>
 <hr class="container">
 <p class="container">Created by Lauren Yoo in 2024. Updated 10/29/24.</p>
 
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
 <script src="https://unpkg.com/d3@7"></script>
 <script type="module" src="./bathtiles.js"></script>
 
 <script>
+    let isDataVisible = true;
+
     document.addEventListener('DOMContentLoaded', function() {
         import('./bathtiles.js').then(({ Bathtiles }) => {
             console.log("Loading bathtiles.js");
             const target = document.getElementById('heatmap');
-            const bathtiles = new Bathtiles();
+            const bathtiles = new Bathtiles(null,'#00D26A');
             bathtiles.load(target);
 
             const handleLoadData = () => {
-                const dummyData = {
-                    submissionCalendar: JSON.stringify({
-                        '1704067200': 5, // January 1, 2024
-                        '1706745600': 3, // February 1, 2024
-                        '1709328000': 8, // March 1, 2024
-                        '1712006400': 2, // April 1, 2024
-                        '1714684800': 6, // May 1, 2024
-                        '1717363200': 4, // June 1, 2024
-                        '1720041600': 7, // July 1, 2024
-                        '1722652800': 1, // August 1, 2024
-                        '1725398400': 9, // September 1, 2024
-                        '1728076800': 5, // October 1, 2024
-                        '1730755200': 0, // November 1, 2024
-                        '1733433600': 3  // December 1, 2024
-                    }),
-                };
-                bathtiles.import(dummyData);
-                bathtiles.load(target);
+                const dummyData = JSON.stringify({
+                    '1704067200': 5, // January 1, 2024
+                    '1706745600': 3, // February 1, 2024
+                    '1709328000': 8, // March 1, 2024
+                    '1712006400': 2, // April 1, 2024
+                    '1714684800': 6, // May 1, 2024
+                    '1717363200': 4, // June 1, 2024
+                    '1720041600': 7, // July 1, 2024
+                    '1722652800': 1, // August 1, 2024
+                    '1725398400': 9, // September 1, 2024
+                    '1728076800': 5, // October 1, 2024
+                    '1730755200': 0, // November 1, 2024
+                    '1733433600': 3  // December 1, 2024
+                });
+                if (isDataVisible){
+                    bathtiles.import(dummyData);
+                    bathtiles.load(target);
+                    isDataVisible = false;
+                } else {
+                    bathtiles.empty();
+                    bathtiles.load(target);
+                    isDataVisible = true;
+                }
             };
-
-            const loadButton = document.getElementById('loadButton');
-            if (loadButton) {
-                loadButton.addEventListener('click', handleLoadData);
-            }
+            document.getElementById('loadButton').addEventListener('click', handleLoadData)
         });
     });
 </script>
