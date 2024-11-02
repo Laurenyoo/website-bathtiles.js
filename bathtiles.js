@@ -119,7 +119,7 @@ class Bathtiles {
             .enter()
             .append('svg')
             .attr('width', LEGEND_WIDTH)
-            .attr('height', 15)
+            .attr('height', 17)
             .attr('dominant-baseline', 'middle')
             .append('g')
             .attr('transform', 'translate(0,10)')
